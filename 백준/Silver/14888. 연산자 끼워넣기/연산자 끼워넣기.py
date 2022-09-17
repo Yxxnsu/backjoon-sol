@@ -1,38 +1,37 @@
-import itertools
-def n(z,x):
-    re=0
-    if z<0:
-        re=abs(z)//x
-        return re*(-1)
-    else:
-        re=z//x
-        return re
+from itertools import permutations
 
-def y(q,dd,y):
-    res=a[0]
-    for i in range(0,len(dd)):
-        if dd[i]=='0':
-            res+=a[i+1]
-        elif dd[i]=='1':
-            res-=a[i+1]
-        elif dd[i]=='2':
-            res*=a[i+1]
-        elif dd[i]=='3':
-            res=n(res,a[i+1])
-    q.append(res)
+times = int(input())
+numbers = [int(x) for x in input().split()]
+add, sub, mul, div = map(int, input().split())
 
-N=int(input())
-a=list(map(int,input().split()))
-b=list(map(int,input().split()))
-yy=[]
-for i in range(0,4):
-    for j in range(0,b[i]):
-        yy.append(str(i))
-yy=list(map(''.join,itertools.permutations(yy,len(yy))))
-c=[]
-ee=set(yy)
-yy=list(ee)
-for i in range(0,len(yy)):
-    y(c,yy[i],a)
-print(max(c))
-print(min(c))
+# get operator list
+operators = ['+'] * add + ['-'] * sub + ['*'] * mul + ['/'] * div
+
+oprt_prmt = list(set(permutations(operators, len(operators))))
+min_value, max_value = 1e9, -1e9
+
+for i in range(len(oprt_prmt)):
+	
+    temp = numbers[0]
+    
+    for j in range(len(oprt_prmt[i])):
+        if oprt_prmt[i][j] == '+':
+            temp += numbers[j + 1]
+        elif oprt_prmt[i][j] == '-':
+            temp -= numbers[j + 1]
+        elif oprt_prmt[i][j] == '*':
+            temp *= numbers[j + 1]
+        else:
+            if temp < 0:
+                temp = abs(temp) // numbers[j + 1]
+                temp = temp * (-1)
+            else:
+                temp //= numbers[j + 1]
+                
+    if min_value > temp:
+        min_value = temp
+    if max_value < temp:
+        max_value = temp
+	
+print(max_value)
+print(min_value)
