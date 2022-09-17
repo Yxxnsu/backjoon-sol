@@ -33,5 +33,4 @@ for i in range(len(oprt_prmt)):
     if max_value < temp:
         max_value = temp
 	
-print(max_value)
-print(min_value)
+print(f'{max_value}\n{min_value}')
