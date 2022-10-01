@@ -1,18 +1,20 @@
-import sys
-N,K = map(int,sys.stdin.readline().split())
-nums = list(map(int,sys.stdin.readline().strip()))
+from sys import stdin
+input = stdin.readline
+
+N, K = map(int,input().split())
+num = list(map(int,input().strip()))
+end = N - K
 
 result = []
-delNum = K
 
 for i in range(N):
-    while delNum>0 and result:
-        if result[len(result)-1] < nums[i]:
+    while K > 0 and result:
+        if result[-1] < num[i]:
             result.pop()
-            delNum-=1
+            K -= 1
         else:
             break
-    result.append(nums[i])
+    result.append(num[i])
     
-for i in range(N-K):
-    print(result[i],end="")
+for i in range(end):
+    print(result[i], end="")
