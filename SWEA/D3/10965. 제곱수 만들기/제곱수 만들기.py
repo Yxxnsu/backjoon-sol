@@ -22,9 +22,6 @@ def sol():
                 ans *= n
                 break
             i += 1
-            # if i == len(p_list[1]):
-            #     ans *= n
-            #     break
             cnt = 0
     return ans 
 
