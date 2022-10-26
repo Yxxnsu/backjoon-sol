@@ -1,14 +1,15 @@
-for num in range(int(input())):
-    n = int(input())-1
- 
+T = int(input())
+
+def sol():
+    k = int(input()) - 1
+
     while True:
-        if n % 2 == 1:
-            n = n//2
- 
-        if n % 4 == 0:
-            ans = 0
-            break
-        elif n % 2 == 0:
-            ans = 1
-            break
-    print(f'#{num+1}',ans)
+        if k % 2 == 1:
+            k //= 2
+        if k % 4 == 0:
+            return 0
+        elif k % 2 == 0:
+            return 1
+
+for tc in range(1, T+1):
+    print(f'#{tc} {sol()}')
