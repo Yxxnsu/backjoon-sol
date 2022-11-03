@@ -1,11 +1,5 @@
 T = int(input())
 
-def dayToHour():
-    pass
-
-def hourToSecond():
-    pass
-
 def sol():
 
     d, h, m = map(int, input().split())    
