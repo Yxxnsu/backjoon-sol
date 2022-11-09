@@ -9,5 +9,7 @@ def sol():
 
     return f'{s1} {s2} {s2 + N}'
 
+ans = []
 for tc in range(1, T+1):
-    print(f'#{tc} {sol()}')
+    ans.append(f'#{tc} {sol()}')
+print(*ans, sep='\n')
