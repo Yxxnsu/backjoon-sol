@@ -20,5 +20,7 @@ def sol():
     
     return ' '.join(li[:10])
 
+ans = []
 for tc in range(1, T+1):
-    print(f'#{tc} {sol()}')
+    ans.append(f'#{tc} {sol()}')
+print(*ans, sep='\n')
