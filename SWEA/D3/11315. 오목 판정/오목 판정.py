@@ -18,18 +18,12 @@ def sol():
                     ny = j + dy[k]
                     
                     cnt = 1
-                    while True:
+                    while 0 <= nx < N and 0 <= ny < N and matrix[nx][ny] == 'o':
+                        nx += dx[k]
+                        ny += dy[k]
+                        cnt += 1
                         if cnt == 5:
                             return 'YES'
-                        if 0 <= nx < N and 0 <= ny < N:
-                            if matrix[nx][ny] == 'o':
-                                cnt += 1
-                            else:
-                                cnt = 0                                 
-                            nx += dx[k]
-                            ny += dy[k]                           
-                        else:
-                            break
     return 'NO'                            
 
 for tc in range(1, T+1):
