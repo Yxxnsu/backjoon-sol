@@ -1,28 +1,36 @@
-t = int(input())
- 
-def check() :
-    # 오른쪽, 아래, 오른쪽 아래 대각선, 왼쪽 아래 대각선
-    dx = [0, 1, 1, 1]
-    dy = [1, 0, 1, -1]
- 
-    for i in range(n) :
-        for j in range(n) :
-            if data[i][j] == 'o' :
-                for dir in range(4) :
-                    nx = i
-                    ny = j
-                    cnt = 0
- 
-                    while 0 <= nx < n and 0 <= ny < n and data[nx][ny] == 'o' :
-                        cnt += 1
-                        nx += dx[dir]
-                        ny += dy[dir]
-                    if cnt >= 5 :
-                        return 'YES'
-    return 'NO'
- 
-for tc in range(1, t + 1) :
-    n = int(input())
-    data = [input() for _ in range(n)]
- 
-    print('#%d %s' % (tc, check()))
+T = int(input())
+
+def sol():
+
+    N = int(input())
+
+    matrix = [list(input()) for _ in range(N)]
+
+    dx = [-1,1,0,0,-1,-1,1,1]
+    dy = [0,0,-1,1,-1,1,-1,1]
+
+
+    for i in range(N):
+        for j in range(N):
+            if matrix[i][j] == 'o':
+                for k in range(8):
+                    nx = i + dx[k]
+                    ny = j + dy[k]
+                    
+                    cnt = 1
+                    while True:
+                        if cnt == 5:
+                            return 'YES'
+                        if 0 <= nx < N and 0 <= ny < N:
+                            if matrix[nx][ny] == 'o':
+                                cnt += 1
+                            else:
+                                cnt = 0                                 
+                            nx += dx[k]
+                            ny += dy[k]                           
+                        else:
+                            break
+    return 'NO'                            
+
+for tc in range(1, T+1):
+    print(f'#{tc} {sol()}')
