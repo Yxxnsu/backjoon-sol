@@ -15,28 +15,16 @@ for tc in range(1, T+1):
             graph[x].append(y)
             graph[y].append(x)
 
-
-        def DFS(v, cnt):
-
-            global visited, ans
+        def DFS(v, s):
+            global ans
+            ans = max(ans, len(s))
             
-            ans = max(cnt, ans)
-
-            if visited[v] == True:
-                return False
-
-            visited[v] = True
-
             for k in graph[v]:
-                if not visited[k]:
-                    DFS(k, cnt + 1)
-                    visited[k] = False
-                                        
-            return True
-        
+                if k not in s:
+                    DFS(k, s + [v])        
+            
         ans = 0
         for i in range(1, N+1):
-            visited = [False] * (N+1)
-            DFS(i, 1)
+            DFS(i, [i])
 
         print(f'#{tc} {ans}')
