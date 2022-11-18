@@ -11,9 +11,7 @@ def sol():
     alpha = 'abcdefghijklmnopqrstuvwxyz'
 
     for i in range(1, N+1):
-        arr = list(combinations(li,i))
-        for j in range(len(arr)):
-            comb_li.append(''.join(arr[j]))
+        comb_li.extend([''.join(list(x)) for x in combinations(li,i)])
 
     ans = 0
     for v in comb_li:
@@ -23,7 +21,7 @@ def sol():
                 cnt += 1
         if cnt == 26:
             ans += 1
-    
+            
     return ans
         
 for tc in range(1, T+1):
