@@ -1,28 +1,34 @@
-from itertools import combinations
-
 T = int(input())
- 
-def sol():
 
-    N = int(input())
-    li = [input() for _ in range(N)]
-    comb_li = []
+def DFS(i):
 
-    alpha = 'abcdefghijklmnopqrstuvwxyz'
+    global ans
 
-    for i in range(1, N+1):
-        comb_li.extend([''.join(list(x)) for x in combinations(li,i)])
-
-    ans = 0
-    for v in comb_li:
+    if i == N:
+        s = ''
+        for i in range(N):
+            if visited[i]:
+                s += li[i]
         cnt = 0
-        for s in alpha:
-            if s in v:
+        for c in alpha:
+            if c in s:
                 cnt += 1
         if cnt == 26:
             ans += 1
-            
-    return ans
+        return 
         
+    visited[i] = True
+    DFS(i+1)
+    visited[i] = False
+    DFS(i+1)
+
 for tc in range(1, T+1):
-    print(f'#{tc} {sol()}')
+    N = int(input())
+    li = [input() for _ in range(N)]
+    
+    visited = [False] * N
+    alpha = 'abcdefghijklmnopqrstuvwxyz'
+    
+    ans = 0
+    DFS(0)
+    print(f'#{tc} {ans}')
