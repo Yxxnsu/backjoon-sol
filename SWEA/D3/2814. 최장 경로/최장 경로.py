@@ -1,5 +1,5 @@
 T = int(input())
-
+res = []
 
 for tc in range(1, T+1):
 
@@ -27,4 +27,6 @@ for tc in range(1, T+1):
         for i in range(1, N+1):
             DFS(i, [i])
 
-        print(f'#{tc} {ans}')
+        res.append(f'#{tc} {ans}')
+
+print(*res,sep='\n')
