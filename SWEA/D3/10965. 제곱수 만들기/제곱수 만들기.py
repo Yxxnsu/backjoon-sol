@@ -1,43 +1,48 @@
-T = int(input())    
+T = int(input())
 
 def sol():
-    n = int(input())
-    ans = 1
 
-    if p_list[0][n]:
-        return n
-    
-    i, cnt = 0, 0
-    while n > 1:
-        if n % p_list[1][i] == 0:
-            cnt += 1
-            if n // p_list[1][i] == 1 and cnt % 2 != 0:
-                ans *= n
-                break
-            n //= p_list[1][i]
-        else:
+    N = int(input())
+
+    if prime_list[0][N]:
+        return N
+
+    ans, cnt, i = 1, 0, 0
+    while N > 1:
+
+        if N % prime_list[1][i] != 0:
+
             if cnt % 2 != 0:
-                ans *= p_list[1][i]            
-            if p_list[0][n]:
-                ans *= n
-                break
+                ans *= prime_list[1][i]
+            
+            if prime_list[0][N]:
+                return ans * N
+            
             i += 1
             cnt = 0
-    return ans 
 
-def prime_list(n):
+        else:
+            N //= prime_list[1][i]
+            cnt += 1
+
+            if N == 1 and cnt % 2 != 0:
+                return ans * prime_list[1][i]
+            
+    return ans
+
+def prime_number(n):
     seive = [True] * n
     m = int(n ** 0.5) + 1
 
     for i in range(2, m):
-        if seive[i] == True:
+        if seive[i]:
             for j in range(i+i, n, i):
-                seive[j] = False
-    return [seive,[i for i in range(2, n) if seive[i] == True]]
+                if seive[j]: seive[j] = False
+    
+    return [seive, [i for i in range(2, n) if seive[i] == True]]
 
-p_list = prime_list(10000001)
-result = []
+prime_list = prime_number((10 ** 7) + 1)
+ans = []
 for tc in range(1, T+1):
-    result.append(f'#{tc} {sol()}')
-for v in result:
-    print(v)
+    ans.append(f'#{tc} {sol()}')
+print(*ans, sep='\n')
