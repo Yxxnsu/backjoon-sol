@@ -1,21 +1,24 @@
 T = int(input())
 
 def sol():
-    
-    n, m = map(int, input().split())
-    li = [list(map(int,input().split())) for _ in range(m)]
-    
-    graph = [[] for _ in range(n+1)]
-    for a, b in li:
-        graph[a].append(b)
-        graph[b].append(a)
+
+    N, M = map(int, input().split())
+    graph = [[] for _ in range(N+1)]
+
+    for i in range(M):
+        x, y = map(int, input().split())
+
+        graph[x].append(y)
+        graph[y].append(x)
     
     ans = 0
-    for i in range(1, n+1):
-        for j in graph[i]:
-            for k in graph[j]:
-                if k in graph[i]:
+    for i in range(1, N+1):
+        for g in graph[i]:
+            for v in graph[g]:
+                if v in graph[i]:
                     ans += 1
+
     return ans // 6
+
 for tc in range(1, T+1):
     print(f'#{tc} {sol()}')
